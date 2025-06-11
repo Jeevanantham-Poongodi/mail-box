@@ -112,39 +112,39 @@ function view_email(id) {
           body : JSON.stringify({
             read: true
           })
-        });
+        })
       }
 
       const archiveBtn = document.createElement('button');
       archiveBtn.innerHTML = email.archived ? "Unarchive" : "Archive";
-      archiveBtn.className = email.archived ? "btn-danger" : "btn-success";
-      archiveBtn.addEventListener('click', function() {
-          fetch(`/emails/${email.id}`) , {
-            method: 'PUT',
-            body: JSON.stringify({
-              archived: !email.archived
-            })
-          }
-          .then(() => { load_mailbox('archive')})
+      archiveBtn.className = email.archived ? "btn-success" : "btn-danger" ;
+      archiveBtn.addEventListener('click', function () {
+        fetch(`/emails/${email.id}`, {
+          method: 'PUT',
+          body: JSON.stringify({
+            archived: !email.archived
+          })
+        })
+        .then(() => {load_mailbox('archive')})
       });
       document.querySelector('#email-view').append(archiveBtn);
 
       const replyBtn = document.createElement('button');
       replyBtn.innerHTML = "Reply";
       replyBtn.className = "btn-reply";
-      replyBtn.addEventListener('click', function () {
+      replyBtn.addEventListener('click', function() {
         compose_email();
 
         document.querySelector('#compose-recipients').value = email.sender;
-        let subject = email.subject;
-        if (subject.split(' ', 1)[0] != "Re:"){
-          subject = "Re: " + email.subject;
+        let subject = email.subject
+        if (subject.split(' ', 1)[0] != "Re:") {
+          subject = "Re: " + email.subject
         }
         document.querySelector('#compose-subject').value = subject;
         document.querySelector('#compose-body').value = `On ${email.timestamp} ${email.sender} wrote: ${email.body}`;
+
       });
       document.querySelector('#email-view').append(replyBtn);
     });
-    
 }
 
