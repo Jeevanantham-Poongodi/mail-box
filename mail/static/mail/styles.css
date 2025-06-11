@@ -1,0 +1,22 @@
+textarea {
+    min-height: 400px;
+}
+
+.email-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+.btn-danger{
+  background-color: red;
+}
+
+.btn-success{
+  background-color: green;
+}
+
+.btn-reply{
+  background-color: skyblue;
+}
